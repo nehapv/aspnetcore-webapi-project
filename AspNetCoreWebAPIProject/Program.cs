@@ -1,4 +1,6 @@
 
+using Scalar.AspNetCore;
+
 namespace AspNetCoreWebAPIProject
 {
     public class Program
@@ -13,12 +15,24 @@ namespace AspNetCoreWebAPIProject
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            // Swagger
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                // Built-in OpenAPI document
                 app.MapOpenApi();
+
+                // Scalar UI
+                app.MapScalarApiReference();
+
+                // Swagger JSON + Swagger UI
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
