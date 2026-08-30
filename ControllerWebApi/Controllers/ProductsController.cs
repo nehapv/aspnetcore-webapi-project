@@ -81,7 +81,7 @@ namespace MyFirstWebAPIProject.Controllers
                 CategoryName = _categories.FirstOrDefault(c => c.Id == newProduct.CategoryId)?.Name ?? "Unknown"
             };
 
-            return CreatedAtAction(nameof(GetProduct), new { id = productDTO.Id }, productDTO);
+            return CreatedAtAction(nameof(GetProduct), new { id = productDTO.Id }, productDTO); //201, Response Body, Location
         }
 
         // PUT: api/products/{id}
@@ -104,7 +104,7 @@ namespace MyFirstWebAPIProject.Controllers
             existingProduct.Price = updateDto.Price;
             existingProduct.CategoryId = updateDto.CategoryId;
 
-            return NoContent();
+            return NoContent();  // 204 sucess ,No Content 
         }
 
         // DELETE: api/products/{id}
@@ -118,7 +118,7 @@ namespace MyFirstWebAPIProject.Controllers
             }
 
             _products.Remove(product);
-            return NoContent();
+            return NoContent(); // 204 sucess ,No Content
         }
     }
 }
